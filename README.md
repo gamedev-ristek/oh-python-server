@@ -1,8 +1,4 @@
-sebelum start server, jgn lupa...
-
-1. ```python -m venv venv```
-2. ```.\venv\Scripts\activate```
-3. ```pip install -r .\requirements.txt```
+sedikit mengingatkan, sebelum start server jangan lupa buat virtual env biar dependency dari package yang diinstal tidak bentrok :v
 
 start server:
 
