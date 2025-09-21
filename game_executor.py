@@ -7,7 +7,7 @@ class Player:
     def __init__(self, executor):
         self.executor = executor
         self.position = {"x": 0, "y": 0}
-        self.reset_position = {"x": 0, "y": 0}
+        # self.reset_position = {"x": 0, "y": 0}
         
     def move_up(self, steps=1):
         if not isinstance(steps, int) or steps < 0:
@@ -85,15 +85,15 @@ class Player:
         # print(f"Moved right {steps} steps to ({self.position['x']}, {self.position['y']})")
         return f"Moved right {steps} steps"
     
-    def reset(self):
-        self.position = self.reset_position.copy()
-        action = {
-            "type": "reset",
-            "position": self.position.copy()
-        }
-        self.executor.add_action(action)
-        print("reset to starting position")
-        return "Player reset"
+    # def reset(self):
+    #     self.position = self.reset_position.copy()
+    #     action = {
+    #         "type": "reset",
+    #         "position": self.position.copy()
+    #     }
+    #     self.executor.add_action(action)
+    #     print("reset to starting position")
+    #     return "Player reset"
 
 class GameExecutor:
     def __init__(self):
@@ -104,9 +104,9 @@ class GameExecutor:
         self.actions.append(action)
         print(f"action added: {action}")
     
-    def reset(self):
-        self.player.reset()
-        self.actions.clear()
+    # def reset(self):
+    #     self.player.reset()
+    #     self.actions.clear()
     
     async def execute_player_code(self, code: str) -> dict:
         print(f"executing:\n{code}")
