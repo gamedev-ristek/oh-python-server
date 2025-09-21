@@ -7,7 +7,6 @@ class Player:
     def __init__(self, executor):
         self.executor = executor
         self.position = {"x": 0, "y": 0}
-        # self.reset_position = {"x": 0, "y": 0}
         
     def move_up(self, steps=1):
         if not isinstance(steps, int) or steps < 0:
@@ -25,7 +24,6 @@ class Player:
         }
         
         self.executor.add_action(action)
-        # print(f"Moved up {steps} steps to ({self.position['x']}, {self.position['y']})")
         return f"Moved up {steps} steps"
     
     def move_down(self, steps=1):
@@ -44,7 +42,6 @@ class Player:
         }
         
         self.executor.add_action(action)
-        # print(f"Moved down {steps} steps to ({self.position['x']}, {self.position['y']})")
         return f"Moved down {steps} steps"
     
     def move_left(self, steps=1):
@@ -63,7 +60,6 @@ class Player:
         }
         
         self.executor.add_action(action)
-        # print(f"Moved left {steps} steps to ({self.position['x']}, {self.position['y']})")
         return f"Moved left {steps} steps"
     
     def move_right(self, steps=1):
@@ -82,18 +78,7 @@ class Player:
         }
         
         self.executor.add_action(action)
-        # print(f"Moved right {steps} steps to ({self.position['x']}, {self.position['y']})")
         return f"Moved right {steps} steps"
-    
-    # def reset(self):
-    #     self.position = self.reset_position.copy()
-    #     action = {
-    #         "type": "reset",
-    #         "position": self.position.copy()
-    #     }
-    #     self.executor.add_action(action)
-    #     print("reset to starting position")
-    #     return "Player reset"
 
 class GameExecutor:
     def __init__(self):
@@ -102,15 +87,8 @@ class GameExecutor:
         
     def add_action(self, action):
         self.actions.append(action)
-        print(f"action added: {action}")
     
-    # def reset(self):
-    #     self.player.reset()
-    #     self.actions.clear()
-    
-    async def execute_player_code(self, code: str) -> dict:
-        print(f"executing:\n{code}")
-        
+    def execute_player_code(self, code: str) -> dict:
         self.actions.clear()
         
         execution_result = {
@@ -132,7 +110,6 @@ class GameExecutor:
             
             safe_globals = {
                 '__builtins__': {
-                    # 'print': print,
                     'range': range,
                     'len': len,
                     'int': int,
@@ -154,8 +131,6 @@ class GameExecutor:
             
             safe_locals = {}
             
-            print("exec()")
-            
             exec(code, safe_globals, safe_locals)
             
             execution_time = time.time() - start_time
@@ -170,10 +145,7 @@ class GameExecutor:
                 "valid_commands": len(self.actions)
             })
             
-            print(f"actions: {len(self.actions)}, output: {output}")
-            
         except SyntaxError as e:
-            print(f"Syntax Error: {e}")
             execution_result.update({
                 "success": False,
                 "error": f"Syntax Error: {str(e)}",
@@ -182,7 +154,6 @@ class GameExecutor:
             })
             
         except Exception as e:
-            print(f"Runtime Error: {e}")
             error_msg = f"{type(e).__name__}: {str(e)}"
             traceback_str = traceback.format_exc()
             
@@ -195,5 +166,4 @@ class GameExecutor:
         finally:
             sys.stdout = old_stdout
             
-        print(f"execution result: {execution_result}")
         return execution_result
