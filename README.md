@@ -1,4 +1,4 @@
-sedikit mengingatkan, sebelum start server jangan lupa buat virtual env biar dependency dari package yang diinstal tidak bentrok :v
+sedikit mengingatkan, setelah pull repo jangan lupa buat virtual env biar dependency dari package yang diinstal tidak bentrok :v
 
 start server:
 
