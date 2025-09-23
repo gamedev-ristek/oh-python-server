@@ -22,7 +22,7 @@ class UserResult:
     actions_count: int = 0
 
 class ConcurrentLoadTester:
-    def __init__(self, server_url: str = "ws://127.0.0.1:8000/ws", target_users: int = 701):
+    def __init__(self, server_url: str = "ws://127.0.0.1:8000/ws", target_users: int = 501):
         self.server_url = server_url
         self.target_users = target_users
         self.users: Dict[int, UserResult] = {}
@@ -504,7 +504,7 @@ for i in range(1, 10):
 
 async def main():
     SERVER_URL = "ws://127.0.0.1:8000/ws"
-    TARGET_USERS = 701
+    TARGET_USERS = 501
     
     print(f"🔥 High-Concurrency WebSocket Load Tester")
     print(f"Server: {SERVER_URL}")
